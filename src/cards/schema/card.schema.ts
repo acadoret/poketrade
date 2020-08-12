@@ -3,7 +3,6 @@ import { Document } from 'mongoose';
 
 @Schema()
 export class Card extends Document {
-
     @Prop({ required: true })
     id: string;
     @Prop({ required: true })
