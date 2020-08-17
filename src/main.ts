@@ -18,11 +18,12 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup(config.API_DOC_ENDPOINT, app, document);
-  
+
+  app.setGlobalPrefix(config.API_ENDPOINT);
   /* Support for Twig  */
-  app.useStaticAssets(config.APP_STATIC_ASSETS_PATH); 
-  app.setBaseViewsDir(config.APP_BASE_VIEW_DIR_PATH); 
-  app.setViewEngine(config.APP_VIEW_ENGINE);
+  // app.useStaticAssets(config.APP_STATIC_ASSETS_PATH); 
+  // app.setBaseViewsDir(config.APP_BASE_VIEW_DIR_PATH); 
+  // app.setViewEngine(config.APP_VIEW_ENGINE);
 
   await app.listen(3000);
 

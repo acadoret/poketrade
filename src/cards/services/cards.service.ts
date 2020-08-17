@@ -1,8 +1,8 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject, Query } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Card } from './schema/card.schema';
-import { CreateCardDto } from './dto/create-card.dto';
+import { Card } from '../models/schema/card.schema';
+import { CreateCardDto } from '../models/dto/create-card.dto';
 
 @Injectable()
 export class CardsService {

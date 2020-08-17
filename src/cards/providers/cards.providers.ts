@@ -1,6 +1,6 @@
 
 import { Connection } from 'mongoose';
-import { CardSchema } from './schema/card.schema';
+import { CardSchema } from '../models/schema/card.schema';
 
 export const cardsProviders = [
     {

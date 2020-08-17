@@ -1,11 +1,16 @@
 import { Controller, Get, Post, Put, Delete, Param, Body, Query } from '@nestjs/common';
-import { ApiBody, ApiTags, ApiResponse, ApiOkResponse, ApiCreatedResponse, ApiUnauthorizedResponse, ApiForbiddenResponse, ApiHeader } from '@nestjs/swagger';
+import { 
+    ApiBody, ApiTags, ApiResponse, 
+    ApiOkResponse, ApiCreatedResponse, 
+    ApiUnauthorizedResponse, ApiForbiddenResponse, 
+    ApiHeader 
+} from '@nestjs/swagger';
 
 
-import { CardsService } from './cards.service';
+import { CardsService } from '../services/cards.service';
 import { of, Observable } from 'rxjs';
-import { Card } from './schema/card.schema';
-import { CreateCardDto } from './dto/create-card.dto';
+import { Card } from '../models/schema/card.schema';
+import { CreateCardDto } from '../models/dto/create-card.dto';
 
 // @ApiHeader({
 //     name: 'X-MyHeader',

@@ -3,7 +3,7 @@ import { ApiTags, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse } from
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../models/dto/create-user.dto';
 import { User } from '../models/user.schema';
-import { Card } from 'src/cards/schema/card.schema';
+import { Card } from 'src/cards/models/schema/card.schema';
 
 @ApiTags('Users')
 @Controller('users')
