@@ -8,9 +8,7 @@ import { CardsService } from './services/cards.service';
 
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: Card.name, schema: CardSchema }])
-  ],
+  imports: [],
   controllers: [CardsController],
   providers: [CardsService]
 })

@@ -12,7 +12,7 @@ export const config = {
     APP_STATIC_ASSETS_PATH: join(__dirname, '..', 'public'),
     APP_BASE_VIEW_DIR_PATH: join(__dirname, '..', 'views'),
     APP_VIEW_ENGINE: 'twig',
-    APP_STATIC_ROOT_PATH: join(__dirname, '..', 'client/dist'),
+    // APP_STATIC_ROOT_PATH: join(__dirname, '..', 'client/dist'),
     /* BCRYPT */
     APP_SALT_ROUNDS: 10,
     /* DATABASE */

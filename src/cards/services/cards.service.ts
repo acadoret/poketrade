@@ -1,41 +1,29 @@
-import { Model } from 'mongoose';
-import { Injectable, Inject, Query } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Card } from '../models/schema/card.schema';
-import { CreateCardDto } from '../models/dto/create-card.dto';
+import { Injectable } from '@nestjs/common'
+import { PokemonTCG } from 'pokemon-tcg-sdk-typescript'
+import { IQuery } from 'pokemon-tcg-sdk-typescript/dist/sdk';
 
 @Injectable()
 export class CardsService {
-    // constructor(@Inject('CARD_MODEL') private cardModel: Model<Card>,) { }
-    constructor(
-        @InjectModel(Card.name) 
-        private cardModel: Model<Card>
-    ) { }
-
-    async create(createCardDto: CreateCardDto): Promise<Card> {
-        const createdCard = new this.cardModel(createCardDto);
-        return createdCard.save();
+    constructor() {
+        // const pokemon = require('pokemontcgsdk')
     }
 
-    async findAll(page = 1, pageSize = 10): Promise<Card[]> {
-        return this.cardModel.find().skip(page*pageSize).limit(pageSize).exec();
+    /**
+     * Find card by property 
+     * Pass JSON object with properties 
+     * ex : { supertype: 'pokemon', subtype: 'mega' }
+     * @param where JSON Object
+     * @returns Promise<Card[]>
+     */
+    async findBy(where: PokemonTCG.IQuery[]): Promise<PokemonTCG.Card[]> {
+        return PokemonTCG.Card.where(where)
     }
 
-    async findById(id: string): Promise<Card> {
-        return this.cardModel.findById(id).exec();
+    async findAll(page = 1, pageSize = 10): Promise<PokemonTCG.Card[]> {
+        return PokemonTCG.Card.all()
     }
 
-    // async update(id: string, card: CreateCardDto): Promise<Card> {
-    //     this.cardModel.update({ id: id}, card);
-    // }
-
-    async deleteById(id: string): Promise<boolean>{
-        this.cardModel.deleteOne({ id: id }).then(() => {
-            console.log(`Card #${id} deleted`);
-            return true;
-        }).catch(function (error) {
-            console.log(error); 
-        }); 
-        return false;
-    }    
+    async findById(id: string): Promise<PokemonTCG.Card> {
+        return PokemonTCG.Card.find(id)
+    }
 }

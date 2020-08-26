@@ -11,6 +11,8 @@ import { CardsService } from '../services/cards.service';
 import { of, Observable } from 'rxjs';
 import { Card } from '../models/schema/card.schema';
 import { CreateCardDto } from '../models/dto/create-card.dto';
+import { PokemonTCG } from 'pokemon-tcg-sdk-typescript';
+import { IQuery } from 'pokemon-tcg-sdk-typescript/dist/sdk';
 
 // @ApiHeader({
 //     name: 'X-MyHeader',
@@ -22,39 +24,38 @@ export class CardsController {
     constructor(private readonly cardService: CardsService) { }
 
     @Post()
-    @ApiCreatedResponse({ status: 201, description: 'The record has been successfully created.' })
+    @ApiResponse({ status: 201, description: 'Cards fetched' })
     @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
-    async create(@Body() createCardDto: CreateCardDto) {
-        return this.cardService.create(createCardDto);
+    async findBy(@Body() where: PokemonTCG.IQuery[]) {
+        return this.cardService.findBy(where)
     }
 
     @Get()
     @ApiOkResponse({ status: 201, description: 'Cards fetched'})
     @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
-    findAll(@Query() query): Promise<Card[]> {
-        console.log(query)
-        let cards = this.cardService.findAll(query.page, query.pageSize);
+    findAll(): Promise<PokemonTCG.Card[]> {
+        let cards = this.cardService.findAll();
         return cards;
     }
 
     @Get(':id')
     @ApiOkResponse({ status: 201, description: 'Card fetched' })
     @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
-    findOne(@Param('id') id): Promise<Card> {
+    findOne(@Param('id') id): Promise<PokemonTCG.Card> {
         return this.cardService.findById(id);
     }
 
-    @Put(':id')
-    @ApiOkResponse({ status: 201, description: 'Cards updated' })
-    @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
-    update(@Param('id') id, @Body() updateCardDto): string {
-        return `MAJ de la Carte #${id}`
-    }
+    // @Put(':id')
+    // @ApiOkResponse({ status: 201, description: 'Cards updated' })
+    // @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
+    // update(@Param('id') id, @Body() updateCardDto): string {
+    //     return `MAJ de la Carte #${id}`
+    // }
 
-    @Delete(':id')
-    @ApiOkResponse({ status: 201, description: 'Cards deleted' })
-    @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
-    delete(@Param('id') id): string {
-        return `Suppression de la Carte #${id}`
-    }
+    // @Delete(':id')
+    // @ApiOkResponse({ status: 201, description: 'Cards deleted' })
+    // @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
+    // delete(@Param('id') id): string {
+    //     return `Suppression de la Carte #${id}`
+    // }
 }

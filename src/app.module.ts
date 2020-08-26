@@ -11,14 +11,15 @@ import { CardsModule } from './cards/cards.module';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
+    // DatabaseModule,
     // ServeStaticModule.forRoot({ rootPath: config.APP_STATIC_ROOT_PATH,}),
-    MongooseModule.forRoot(`mongodb://${config.DB_MONGO_HOST}/${config.DB_MONGO_NAME}`),
-    CardsModule,
-    DatabaseModule,
+    TypeOrmModule.forRoot(),
     UsersModule,
+    CardsModule,
     AuthModule,
   ],
   controllers: [AppController],
